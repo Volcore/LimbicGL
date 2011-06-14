@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9F54D06813A7E2EF00BCAB6B /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06313A7E2EF00BCAB6B /* EAGLView.m */; };
+		9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */; };
+		9F54D06A13A7E2EF00BCAB6B /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06713A7E2EF00BCAB6B /* Renderer.m */; };
+		9F97063213A7E4DF00EDA5B8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F97063113A7E4DF00EDA5B8 /* GameKit.framework */; };
+		9FBA943913A7E2970080071B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA943813A7E2970080071B /* UIKit.framework */; };
+		9FBA943B13A7E2970080071B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA943A13A7E2970080071B /* Foundation.framework */; };
+		9FBA943D13A7E2970080071B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA943C13A7E2970080071B /* CoreGraphics.framework */; };
+		9FBA943F13A7E2970080071B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA943E13A7E2970080071B /* QuartzCore.framework */; };
+		9FBA944113A7E2970080071B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA944013A7E2970080071B /* OpenGLES.framework */; };
+		9FBA944713A7E2970080071B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA944513A7E2970080071B /* InfoPlist.strings */; };
+		9FBA944A13A7E2970080071B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944913A7E2970080071B /* main.m */; };
+		9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */; };
+		9FBA945013A7E2970080071B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA944E13A7E2970080071B /* MainWindow.xib */; };
+		9FBA945213A7E2970080071B /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945113A7E2970080071B /* Shader.fsh */; };
+		9FBA945413A7E2970080071B /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945313A7E2970080071B /* Shader.vsh */; };
+		9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9F54D06213A7E2EF00BCAB6B /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		9F54D06313A7E2EF00BCAB6B /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		9F54D06413A7E2EF00BCAB6B /* LimbicGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LimbicGLViewController.h; sourceTree = "<group>"; };
+		9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LimbicGLViewController.m; sourceTree = "<group>"; };
+		9F54D06613A7E2EF00BCAB6B /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		9F54D06713A7E2EF00BCAB6B /* Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
+		9F97063113A7E4DF00EDA5B8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		9FBA943413A7E2970080071B /* limbicgl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = limbicgl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FBA943813A7E2970080071B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9FBA943A13A7E2970080071B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9FBA943C13A7E2970080071B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9FBA943E13A7E2970080071B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9FBA944013A7E2970080071B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		9FBA944413A7E2970080071B /* limbicgl-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "limbicgl-Info.plist"; sourceTree = "<group>"; };
+		9FBA944613A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9FBA944813A7E2970080071B /* limbicgl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "limbicgl-Prefix.pch"; sourceTree = "<group>"; };
+		9FBA944913A7E2970080071B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9FBA944B13A7E2970080071B /* LimbicGLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LimbicGLAppDelegate.h; sourceTree = "<group>"; };
+		9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LimbicGLAppDelegate.m; sourceTree = "<group>"; };
+		9FBA944F13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		9FBA945113A7E2970080071B /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		9FBA945313A7E2970080071B /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		9FBA945C13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LimbicGLViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9FBA943113A7E2970080071B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FBA943913A7E2970080071B /* UIKit.framework in Frameworks */,
+				9FBA943B13A7E2970080071B /* Foundation.framework in Frameworks */,
+				9FBA943D13A7E2970080071B /* CoreGraphics.framework in Frameworks */,
+				9FBA943F13A7E2970080071B /* QuartzCore.framework in Frameworks */,
+				9FBA944113A7E2970080071B /* OpenGLES.framework in Frameworks */,
+				9F97063213A7E4DF00EDA5B8 /* GameKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9FBA942913A7E2970080071B = {
+			isa = PBXGroup;
+			children = (
+				9FBA944213A7E2970080071B /* limbicgl */,
+				9FBA943713A7E2970080071B /* Frameworks */,
+				9FBA943513A7E2970080071B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9FBA943513A7E2970080071B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9FBA943413A7E2970080071B /* limbicgl.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9FBA943713A7E2970080071B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F97063113A7E4DF00EDA5B8 /* GameKit.framework */,
+				9FBA943813A7E2970080071B /* UIKit.framework */,
+				9FBA943A13A7E2970080071B /* Foundation.framework */,
+				9FBA943C13A7E2970080071B /* CoreGraphics.framework */,
+				9FBA943E13A7E2970080071B /* QuartzCore.framework */,
+				9FBA944013A7E2970080071B /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9FBA944213A7E2970080071B /* limbicgl */ = {
+			isa = PBXGroup;
+			children = (
+				9FBA944B13A7E2970080071B /* LimbicGLAppDelegate.h */,
+				9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */,
+				9FBA944E13A7E2970080071B /* MainWindow.xib */,
+				9FBA945113A7E2970080071B /* Shader.fsh */,
+				9FBA945313A7E2970080071B /* Shader.vsh */,
+				9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */,
+				9F54D06213A7E2EF00BCAB6B /* EAGLView.h */,
+				9F54D06313A7E2EF00BCAB6B /* EAGLView.m */,
+				9F54D06413A7E2EF00BCAB6B /* LimbicGLViewController.h */,
+				9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */,
+				9F54D06613A7E2EF00BCAB6B /* Renderer.h */,
+				9F54D06713A7E2EF00BCAB6B /* Renderer.m */,
+				9FBA944313A7E2970080071B /* Supporting Files */,
+			);
+			path = limbicgl;
+			sourceTree = "<group>";
+		};
+		9FBA944313A7E2970080071B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9FBA944413A7E2970080071B /* limbicgl-Info.plist */,
+				9FBA944513A7E2970080071B /* InfoPlist.strings */,
+				9FBA944813A7E2970080071B /* limbicgl-Prefix.pch */,
+				9FBA944913A7E2970080071B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9FBA943313A7E2970080071B /* limbicgl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FBA946013A7E2970080071B /* Build configuration list for PBXNativeTarget "limbicgl" */;
+			buildPhases = (
+				9FBA943013A7E2970080071B /* Sources */,
+				9FBA943113A7E2970080071B /* Frameworks */,
+				9FBA943213A7E2970080071B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = limbicgl;
+			productName = limbicgl;
+			productReference = 9FBA943413A7E2970080071B /* limbicgl.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9FBA942B13A7E2970080071B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Limbic Software, Inc.";
+			};
+			buildConfigurationList = 9FBA942E13A7E2970080071B /* Build configuration list for PBXProject "limbicgl" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9FBA942913A7E2970080071B;
+			productRefGroup = 9FBA943513A7E2970080071B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9FBA943313A7E2970080071B /* limbicgl */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9FBA943213A7E2970080071B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FBA944713A7E2970080071B /* InfoPlist.strings in Resources */,
+				9FBA945013A7E2970080071B /* MainWindow.xib in Resources */,
+				9FBA945213A7E2970080071B /* Shader.fsh in Resources */,
+				9FBA945413A7E2970080071B /* Shader.vsh in Resources */,
+				9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9FBA943013A7E2970080071B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FBA944A13A7E2970080071B /* main.m in Sources */,
+				9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */,
+				9F54D06813A7E2EF00BCAB6B /* EAGLView.m in Sources */,
+				9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.m in Sources */,
+				9F54D06A13A7E2EF00BCAB6B /* Renderer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9FBA944513A7E2970080071B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FBA944613A7E2970080071B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9FBA944E13A7E2970080071B /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FBA944F13A7E2970080071B /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FBA945C13A7E2970080071B /* en */,
+			);
+			name = LimbicGLViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9FBA945E13A7E2970080071B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9FBA945F13A7E2970080071B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		9FBA946113A7E2970080071B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "limbicgl/limbicgl-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9FBA946213A7E2970080071B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "limbicgl/limbicgl-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9FBA942E13A7E2970080071B /* Build configuration list for PBXProject "limbicgl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FBA945E13A7E2970080071B /* Debug */,
+				9FBA945F13A7E2970080071B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9FBA946013A7E2970080071B /* Build configuration list for PBXNativeTarget "limbicgl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FBA946113A7E2970080071B /* Debug */,
+				9FBA946213A7E2970080071B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9FBA942B13A7E2970080071B /* Project object */;
+}
