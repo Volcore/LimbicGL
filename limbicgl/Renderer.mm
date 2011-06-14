@@ -243,15 +243,15 @@ enum {
 
 - (void)triggerDrawFrame {
     dispatch_async(queue, ^{
-        NSLog(@"Waiting to draw frame...");
+        //NSLog(@"Waiting to draw frame...");
         //@synchronized(context) {
-            NSLog(@"Drawing frame");
+            //NSLog(@"Drawing frame");
             BOOL res = [EAGLContext setCurrentContext:thread_context];
             assert(res == YES);
             [self drawFrame];
             glFlush();
             [EAGLContext setCurrentContext:nil];
-            NSLog(@"Drawing frame done");
+            //NSLog(@"Drawing frame done");
        //}
     });
 }

@@ -56,9 +56,13 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
   UITouch *touch = [touches anyObject];
   if ([touch tapCount] == 2) {
+    dispatch_queue_t queue = dispatch_queue_create("com.limbic.gltest.gamecenterqueue", 0);
+    dispatch_async(queue, ^{
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
       NSLog(@"Authenticate GKLocalPlayer with error: %@", error);
     }];
+    });
+    dispatch_release(queue);
   }
 }
 
