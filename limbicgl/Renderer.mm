@@ -1,6 +1,6 @@
 //
-//  Renderer.m
-//  GLTest
+//  Renderer.mm
+//  LimbicGL
 //
 //  Created by Volker Schönefeld on 6/12/11.
 //  Copyright 2011 Limbic Software, Inc. All rights reserved.
@@ -9,6 +9,12 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "Renderer.h"
+#include <performancemonitor/performancemonitor.h>
+
+#define ARC4RANDOM_MAX (0x100000000ull)
+static double randomDouble() {
+  return double(arc4random())/double(ARC4RANDOM_MAX);
+}
 
 // Uniform index.
 enum {
@@ -48,11 +54,15 @@ enum {
 - (void)setLayer:(CAEAGLLayer *)l {
   NSLog(@"setLayer called");
   layer = l;
-  [EAGLContext setCurrentContext:context];
-  [self deleteFramebuffer];
-  [self createFramebuffer];
-  glFlush();
-  [EAGLContext setCurrentContext:nil];
+  @synchronized(context) {
+    NSLog(@"SetLayer starting.");
+    [EAGLContext setCurrentContext:context];
+    [self deleteFramebuffer];
+    [self createFramebuffer];
+    glFlush();
+    [EAGLContext setCurrentContext:nil];
+    NSLog(@"SetLayer done.");
+  }
 }
 
 
@@ -95,7 +105,7 @@ enum {
         //});
         dispatch_async(queue, ^{
           NSLog(@"Allocating thread context");
-          thread_context = [[EAGLContext alloc] initWithAPI:[self.context API] sharegroup:self.context.sharegroup];
+          thread_context = [[EAGLContext alloc] initWithAPI:self.context.API sharegroup:self.context.sharegroup];
         });
     }
     return self;
@@ -105,7 +115,8 @@ enum {
     NSLog(@"Teardown called");
     // Synchronosuly tear down
     //dispatch_sync(queue, ^{
-/*        NSLog(@"Running Teardown");
+    @synchronized(context) {
+        NSLog(@"Running Teardown");
         if (program) {
             glDeleteProgram(program);
             program = 0;
@@ -115,7 +126,9 @@ enum {
         if ([EAGLContext currentContext] == context)
             [EAGLContext setCurrentContext:nil];
         [context release];
-        context = nil;*/
+        [thread_context release];
+        context = nil;
+    }
     //});
 }
 
@@ -131,12 +144,12 @@ enum {
     if (!animating) {
         NSLog(@"Creating display link...");
         // Create the thread
-        [NSThread detachNewThreadSelector:@selector(threadMainLoop) toTarget:self withObject:nil];
-        /*CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+        //[NSThread detachNewThreadSelector:@selector(threadMainLoop) toTarget:self withObject:nil];
+        CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
         [aDisplayLink setFrameInterval:animationFrameInterval];
         NSRunLoop *loop = [NSRunLoop currentRunLoop];
         [aDisplayLink addToRunLoop:loop forMode:NSRunLoopCommonModes];
-        self.displayLink = aDisplayLink;*/
+        self.displayLink = aDisplayLink;
         animating = TRUE;
     }
 }
@@ -167,7 +180,10 @@ enum {
     }
 }
 
+
 - (void)drawFrame {
+    PerformanceMonitor *pm = PerformanceMonitor::Shared();
+    pm->FrameStart();
       //NSLog(@"drawFrame called");
     //assert(dispatch_get_current_queue() == queue);
     [self setFramebuffer];
@@ -211,30 +227,32 @@ enum {
     }
 #endif
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    pm->Draw(framebufferWidth, framebufferHeight);
     [self presentFramebuffer];
     GLenum error = glGetError();
     if (error != GL_NO_ERROR) {
         NSLog(@"Error: %i", error);
     }
       //NSLog(@"drawFrame done");
+    pm->FrameEnd();
+    pm->UpdateStart();
+    double delay = 0.005 * randomDouble(); // between 0 and 5 ms delay
+    [NSThread sleepForTimeInterval:delay];
+    pm->UpdateEnd();
 }
 
 - (void)triggerDrawFrame {
-      //NSLog(@"triggerDrawFrame called");
-    //@synchronized(thread_context) {
-     // BOOL res = [EAGLContext setCurrentContext:context];
-      //assert(res == YES);
-      //glFlush();\
-  
-  
-    //  [EAGLContext setCurrentContext:nil];     
-    //}
     dispatch_async(queue, ^{
+        NSLog(@"Waiting to draw frame...");
+        //@synchronized(context) {
+            NSLog(@"Drawing frame");
             BOOL res = [EAGLContext setCurrentContext:thread_context];
             assert(res == YES);
             [self drawFrame];
             glFlush();
             [EAGLContext setCurrentContext:nil];
+            NSLog(@"Drawing frame done");
+       //}
     });
 }
 
@@ -257,17 +275,16 @@ enum {
         
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
         
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
             NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        }
     }
 }
 
 - (void)deleteFramebuffer {
     NSLog(@"deleteFramebuffer called");
-    //assert(dispatch_get_current_queue() == queue);
     if (context) {
         NSLog(@"deleteFramebuffer run");
-        //[EAGLContext setCurrentContext:context];
         if (defaultFramebuffer) {
             glDeleteFramebuffers(1, &defaultFramebuffer);
             defaultFramebuffer = 0;
@@ -276,7 +293,6 @@ enum {
             glDeleteRenderbuffers(1, &colorRenderbuffer);
             colorRenderbuffer = 0;
         }
-        //[EAGLContext setCurrentContext:nil];
     }
 }
 
@@ -297,25 +313,15 @@ enum {
 
 
 - (void)setFramebuffer {
-      //NSLog(@"setFramebuffer called");
-    //assert(dispatch_get_current_queue() == queue);
-    //if (!defaultFramebuffer)
-      //[self createFramebuffer];
     assert(defaultFramebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
     glViewport(0, 0, framebufferWidth, framebufferHeight);
 }
 
 - (void)presentFramebuffer {
-      //NSLog(@"presentFramebuffer called");
-    //assert(dispatch_get_current_queue() == queue);
-    //NSLog(@"a");
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
-    //NSLog(@"b");
     BOOL success = [thread_context presentRenderbuffer:GL_RENDERBUFFER];
-    //NSLog(@"c");
     assert(success == YES);
-    //NSLog(@"d");
 }
 
 

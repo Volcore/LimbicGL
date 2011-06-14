@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		9F54D06813A7E2EF00BCAB6B /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06313A7E2EF00BCAB6B /* EAGLView.m */; };
 		9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */; };
-		9F54D06A13A7E2EF00BCAB6B /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06713A7E2EF00BCAB6B /* Renderer.m */; };
+		9F54D06A13A7E2EF00BCAB6B /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06713A7E2EF00BCAB6B /* Renderer.mm */; };
 		9F97063213A7E4DF00EDA5B8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F97063113A7E4DF00EDA5B8 /* GameKit.framework */; };
+		9F97064513A7E66100EDA5B8 /* glprogram.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9F97063F13A7E66100EDA5B8 /* glprogram.cc */; };
+		9F97064613A7E66100EDA5B8 /* glshader.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9F97064113A7E66100EDA5B8 /* glshader.cc */; };
+		9F97064713A7E66100EDA5B8 /* performancemonitor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9F97064313A7E66100EDA5B8 /* performancemonitor.cc */; };
 		9FBA943913A7E2970080071B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA943813A7E2970080071B /* UIKit.framework */; };
 		9FBA943B13A7E2970080071B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA943A13A7E2970080071B /* Foundation.framework */; };
 		9FBA943D13A7E2970080071B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA943C13A7E2970080071B /* CoreGraphics.framework */; };
@@ -31,8 +34,14 @@
 		9F54D06413A7E2EF00BCAB6B /* LimbicGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LimbicGLViewController.h; sourceTree = "<group>"; };
 		9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LimbicGLViewController.m; sourceTree = "<group>"; };
 		9F54D06613A7E2EF00BCAB6B /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
-		9F54D06713A7E2EF00BCAB6B /* Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
+		9F54D06713A7E2EF00BCAB6B /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
 		9F97063113A7E4DF00EDA5B8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		9F97063F13A7E66100EDA5B8 /* glprogram.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glprogram.cc; sourceTree = "<group>"; };
+		9F97064013A7E66100EDA5B8 /* glprogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glprogram.h; sourceTree = "<group>"; };
+		9F97064113A7E66100EDA5B8 /* glshader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glshader.cc; sourceTree = "<group>"; };
+		9F97064213A7E66100EDA5B8 /* glshader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glshader.h; sourceTree = "<group>"; };
+		9F97064313A7E66100EDA5B8 /* performancemonitor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = performancemonitor.cc; sourceTree = "<group>"; };
+		9F97064413A7E66100EDA5B8 /* performancemonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = performancemonitor.h; sourceTree = "<group>"; };
 		9FBA943413A7E2970080071B /* limbicgl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = limbicgl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBA943813A7E2970080071B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9FBA943A13A7E2970080071B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -68,9 +77,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F97063E13A7E66100EDA5B8 /* performancemonitor */ = {
+			isa = PBXGroup;
+			children = (
+				9F97063F13A7E66100EDA5B8 /* glprogram.cc */,
+				9F97064013A7E66100EDA5B8 /* glprogram.h */,
+				9F97064113A7E66100EDA5B8 /* glshader.cc */,
+				9F97064213A7E66100EDA5B8 /* glshader.h */,
+				9F97064313A7E66100EDA5B8 /* performancemonitor.cc */,
+				9F97064413A7E66100EDA5B8 /* performancemonitor.h */,
+			);
+			path = performancemonitor;
+			sourceTree = "<group>";
+		};
 		9FBA942913A7E2970080071B = {
 			isa = PBXGroup;
 			children = (
+				9F97063E13A7E66100EDA5B8 /* performancemonitor */,
 				9FBA944213A7E2970080071B /* limbicgl */,
 				9FBA943713A7E2970080071B /* Frameworks */,
 				9FBA943513A7E2970080071B /* Products */,
@@ -112,7 +135,7 @@
 				9F54D06413A7E2EF00BCAB6B /* LimbicGLViewController.h */,
 				9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */,
 				9F54D06613A7E2EF00BCAB6B /* Renderer.h */,
-				9F54D06713A7E2EF00BCAB6B /* Renderer.m */,
+				9F54D06713A7E2EF00BCAB6B /* Renderer.mm */,
 				9FBA944313A7E2970080071B /* Supporting Files */,
 			);
 			path = limbicgl;
@@ -198,7 +221,10 @@
 				9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */,
 				9F54D06813A7E2EF00BCAB6B /* EAGLView.m in Sources */,
 				9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.m in Sources */,
-				9F54D06A13A7E2EF00BCAB6B /* Renderer.m in Sources */,
+				9F54D06A13A7E2EF00BCAB6B /* Renderer.mm in Sources */,
+				9F97064513A7E66100EDA5B8 /* glprogram.cc in Sources */,
+				9F97064613A7E66100EDA5B8 /* glshader.cc in Sources */,
+				9F97064713A7E66100EDA5B8 /* performancemonitor.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +298,12 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "limbicgl/limbicgl-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					ENABLE_PEFORMANCE_MONITOR,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -286,7 +317,9 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "limbicgl/limbicgl-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = ENABLE_PEFORMANCE_MONITOR;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

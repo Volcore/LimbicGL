@@ -46,12 +46,11 @@
 
 - (void) setRenderer:(Renderer *)rend {
     renderer = rend;
-    //[renderer setLayer:(CAEAGLLayer*)self.layer];
+    [renderer setLayer:(CAEAGLLayer*)self.layer];
 }
 
 - (void)layoutSubviews {
     [renderer setLayer:(CAEAGLLayer*)self.layer];
-    //[renderer asyncDeleteFramebuffer];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

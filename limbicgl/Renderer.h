@@ -1,6 +1,6 @@
 //
 //  Renderer.h
-//  GLTest
+//  LimbicGL
 //
 //  Created by Volker Schönefeld on 6/12/11.
 //  Copyright 2011 Limbic Software, Inc. All rights reserved.

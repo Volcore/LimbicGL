@@ -1,6 +1,6 @@
 //
-//  GLTestViewController.m
-//  GLTest
+//  LimbicGLViewController.m
+//  LimbicGL
 //
 //  Created by Volker Schoenefeld on 6/11/11.
 //  Copyright 2011 Limbic Software, Inc. All rights reserved.
@@ -63,6 +63,10 @@
 
 - (void)stopAnimation {
     [renderer stopAnimation];
+}
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
 }
 
 @end

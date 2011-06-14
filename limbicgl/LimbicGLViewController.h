@@ -1,6 +1,6 @@
 //
-//  GLTestViewController.h
-//  GLTest
+//  LimbicGLViewController.h
+//  LimbicGL
 //
 //  Created by Volker Schoenefeld on 6/11/11.
 //  Copyright 2011 Limbic Software, Inc. All rights reserved.
