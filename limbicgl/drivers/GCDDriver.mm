@@ -18,18 +18,21 @@
 - (id) initWithRenderTarget:(RenderTarget*)renderTarget andGame:(Game*)game {
   VerboseLog("");
   context_ = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+  queue_ = dispatch_queue_create("com.limbic.limbicgl.gcdqueue", 0);
   displaylink_ = nil;
   rendertarget_ = renderTarget;
   game_ = game;
+  running_ = false;
+  frame_drop_counter_ = 0;
   return self;
 }
 
 - (void) startAnimation {
   VerboseLog("");
   if (displaylink_ == nil) {
-    displaylink_ = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+    displaylink_ = [[[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)] retain];
     [displaylink_ setFrameInterval:1];
-    [displaylink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];    
+    [displaylink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
   }
 }
 
@@ -45,39 +48,63 @@
 - (void) teardown {
   VerboseLog("");
   [self stopAnimation];
-  if (context_) {
-    if (context_ == [EAGLContext currentContext]) {
-      [EAGLContext setCurrentContext:nil];
+  @synchronized(context_) {
+    if (context_) {
+      if (context_ == [EAGLContext currentContext]) {
+        [EAGLContext setCurrentContext:nil];
+      }
+      [context_ release];
+      context_ = nil;
     }
-    [context_ release];
-    context_ = nil;
   }
 }
 
 - (void) setLayer:(CAEAGLLayer*)layer {
   VerboseLog("");
-  [EAGLContext setCurrentContext:context_];
-  [rendertarget_ deleteFramebuffer];
-  [rendertarget_ createFramebuffer:layer forContext:context_];
-  [EAGLContext setCurrentContext:nil];
+  @synchronized(context_) {
+    if (context_) {
+      [EAGLContext setCurrentContext:context_];
+      [rendertarget_ deleteFramebuffer];
+      [rendertarget_ createFramebuffer:layer forContext:context_];
+      [EAGLContext setCurrentContext:nil];
+    }
+  }
 }
 
-- (void) triggerDrawFrame {
+- (void) drawFrame {
   VerboseLog("");
   PerformanceMonitor *pm = PerformanceMonitor::Shared();
   pm->FrameStart();
-  [EAGLContext setCurrentContext:context_];
-  [rendertarget_ setFramebuffer];
-  game_->Draw();
-  pm->Draw(rendertarget_->framebufferWidth, rendertarget_->framebufferHeight);
-  [rendertarget_ presentFramebuffer:context_];
-  glFlush();
-  [EAGLContext setCurrentContext:nil];
+  @synchronized(context_) {
+    if (context_) {
+      [EAGLContext setCurrentContext:context_];
+      [rendertarget_ setFramebuffer];
+      game_->Draw();
+      pm->Draw(rendertarget_->framebufferWidth, rendertarget_->framebufferHeight);
+      [rendertarget_ presentFramebuffer:context_];
+      glFlush();
+      [EAGLContext setCurrentContext:nil];
+    }
+  }
   pm->FrameEnd();
   pm->UpdateStart();
   game_->Update();
   pm->UpdateEnd();
 }
+
+- (void) triggerDrawFrame {
+  if (running_ == false) {
+    running_ = true;
+    dispatch_async(queue_, ^{
+      [self drawFrame];
+      running_ = false;
+    });
+  } else {
+    frame_drop_counter_++;
+    VerboseLog(@"Dropped a frame!");
+  }
+}
+
 
 - (void) dealloc {
   VerboseLog("");

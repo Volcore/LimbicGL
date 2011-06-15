@@ -15,10 +15,24 @@
 #define GCDDRIVER 1
 #define THREADEDDRIVER 2
 // Specifies with Driver to use
-#define DRIVER THREADEDDRIVER
+#define DRIVER GCDDRIVER
+
+// This can configure how much load is put on OpenGL.
+// Note: this doens't actually cause a lot of tiler/renderer utilization. It's just a heuristic way to produce a full 60 hz worth of load for the device
+//       it is definitely _not_ a benchmark.
+// Experimental values ():
+//  3GS: 
+//    200 -- runs smooth at 60 hz
+//    400 -- runs exactly at 60 hz
+//    500 -- runs very close to 60hz, but with the game update it's a little below 60 hz
+//  iPad2:
+//    800 -- runs smooth at 60 hz
+//   1150 -- runs exactly at 60 hz
+//   1600 -- runs slightly below 60 hz
+#define RENDERER_LOAD 100
 
 // This can be used to get very verbose traces for debugging
-//#define VERBOSE_LOG
+#define VERBOSE_LOG
 
 #ifdef VERBOSE_LOG
 #   define VerboseLog(fmt, ...) NSLog((@"%s " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__);

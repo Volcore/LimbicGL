@@ -27,7 +27,7 @@
 - (void) startAnimation {
   VerboseLog("");
   if (displaylink_ == nil) {
-    displaylink_ = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+    displaylink_ = [[[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)] retain];
     [displaylink_ setFrameInterval:1];
     [displaylink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];    
   }

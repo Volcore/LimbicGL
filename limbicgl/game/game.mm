@@ -9,6 +9,8 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
+#include <limbicgl/config.h>
+
 /*******************************************************************************
   A simple GPU program
  ******************************************************************************/
@@ -80,7 +82,7 @@ void Game::Draw() {
   glVertexAttribPointer(att_color, 3, GL_FLOAT, false, 5*sizeof(float), (GLvoid*)(points+2));
   glEnableVertexAttribArray(att_color);
   float base_t = float(fmod(CFAbsoluteTimeGetCurrent(), 1000.0));
-  const int num_quads = 1000;
+  const int num_quads = RENDERER_LOAD;
   for (int i=0; i<num_quads; ++i) {
     float x = base_t*1.0f+i*11.0f;
     float y = base_t*3.0f+i*3.0f;

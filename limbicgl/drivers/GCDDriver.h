@@ -17,6 +17,9 @@ class Game;
   EAGLContext *context_;
   CADisplayLink *displaylink_;
   RenderTarget *rendertarget_;
+  dispatch_queue_t queue_;
+  bool running_;
+  unsigned long frame_drop_counter_;
   Game *game_;
 }
 

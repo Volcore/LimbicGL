@@ -100,13 +100,14 @@
     // store the runloop so it can be terminated on stopanimation
     renderloop_ = [NSRunLoop currentRunLoop];
     // install the display link
-    CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+    CADisplayLink *aDisplayLink = [[[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)] retain];
     [aDisplayLink setFrameInterval:1];
     [aDisplayLink addToRunLoop:renderloop_ forMode:NSDefaultRunLoopMode];
     // start the run loop
     CFRunLoopRun();
     // cleanup
     [aDisplayLink invalidate];
+    [aDisplayLink release];
     renderloop_ = nil;
     [pool release];
     VerboseLog("Shutting down thread");
