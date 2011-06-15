@@ -12,6 +12,8 @@
 class Game;
 @class EAGLContext;
 
+// This driver does everything in the main thread.
+// It uses a display link on the main thread to trigger the draw calls.
 @interface SingleThreadDriver : NSObject<Driver> {
 @private
     EAGLContext *context_;

@@ -12,8 +12,12 @@
 @class CAEAGLLayer;
 
 @protocol Driver
+// Activates the automatic 60hz rendering of the game
 - (void) startAnimation;
+// Stops the automatic rendering
 - (void) stopAnimation;
+// Releases all the allocated assets and modules
 - (void) teardown;
+// Called each time the underlying UIView is re-layouted
 - (void) setLayer:(CAEAGLLayer*)layer;
 @end

@@ -12,6 +12,9 @@
 class Game;
 @class EAGLContext;
 
+// This driver uses GCD to perform the rendering on a secondary thread.
+// It uses a display link on the main thread to trigger the draw calls, 
+// then uses dispatch_async to issue the draw calls.
 @interface GCDDriver : NSObject<Driver> {
 @private
   EAGLContext *context_;

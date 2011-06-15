@@ -48,6 +48,7 @@
 - (void) teardown {
   VerboseLog("");
   [self stopAnimation];
+  dispatch_release(queue_);
   @synchronized(context_) {
     if (context_) {
       if (context_ == [EAGLContext currentContext]) {
@@ -61,8 +62,10 @@
 
 - (void) setLayer:(CAEAGLLayer*)layer {
   VerboseLog("");
+  // This can also run on the GCD queue, but it doesn't have to, as long as it's locked.
   @synchronized(context_) {
     if (context_) {
+
       [EAGLContext setCurrentContext:context_];
       [rendertarget_ deleteFramebuffer];
       [rendertarget_ createFramebuffer:layer forContext:context_];

@@ -15,7 +15,10 @@
 #define PM_HISTORY_LENGTH 320
 
 enum PMDrawMode {
+  // This drawmode plots the frame render (red) and update (green) and other/idle (blue) times
   PM_DRAWMODE_TIMES = 1,
+  // This drawmode just plots the number of triangles in red
+  // You need to write them to the global "extern unsigned int triangle_count;"
   PM_DRAWMODE_TRIANGLES = 2,
 };
 

@@ -12,6 +12,8 @@
 class Game;
 @class EAGLContext;
 
+// This driver runs a separate NSThread with a NSRunLoop.
+// Display link adds events to that NSRunLoop, which are then processed on the secondary thread.
 @interface ThreadedDriver : NSObject<Driver> {
 @private
   EAGLContext *context_;

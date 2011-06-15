@@ -15,51 +15,49 @@
 @implementation RenderTarget
 
 - (void)createFramebuffer:(CAEAGLLayer*)layer forContext:(EAGLContext*)context {
-    if (!defaultFramebuffer) {
-        // Create default framebuffer object.
-        glGenFramebuffers(1, &defaultFramebuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
-        
-        // Create color render buffer and allocate backing store.
-        glGenRenderbuffers(1, &colorRenderbuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
-        [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
-        glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &framebufferWidth);
-        glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
-        VerboseLog(@"%i/%i fb size", framebufferWidth, framebufferHeight);
-        
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
-        
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-          NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
-        }
+  if (!defaultFramebuffer) {
+    // Create default framebuffer object.
+    glGenFramebuffers(1, &defaultFramebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
+    // Create color render buffer and allocate backing store.
+    glGenRenderbuffers(1, &colorRenderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
+    [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &framebufferWidth);
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
+    VerboseLog(@"%i/%i fb size", framebufferWidth, framebufferHeight);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+      NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
     }
+  }
 }
 
 - (void)deleteFramebuffer {
-    VerboseLog(@"");
-    if (defaultFramebuffer) {
-        glDeleteFramebuffers(1, &defaultFramebuffer);
-        defaultFramebuffer = 0;
-    }
-    if (colorRenderbuffer) {
-        glDeleteRenderbuffers(1, &colorRenderbuffer);
-        colorRenderbuffer = 0;
-    }
+  VerboseLog(@"");
+  if (defaultFramebuffer) {
+    glDeleteFramebuffers(1, &defaultFramebuffer);
+    defaultFramebuffer = 0;
+  }
+  if (colorRenderbuffer) {
+    glDeleteRenderbuffers(1, &colorRenderbuffer);
+    colorRenderbuffer = 0;
+  }
 }
 
 - (void)setFramebuffer {
-    assert(defaultFramebuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
-    glViewport(0, 0, framebufferWidth, framebufferHeight);
+  assert(defaultFramebuffer);
+  glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
+  glViewport(0, 0, framebufferWidth, framebufferHeight);
 }
 
 - (void)presentFramebuffer:(EAGLContext*)context {
-    glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
-    BOOL success = [context presentRenderbuffer:GL_RENDERBUFFER];
-    assert(success == YES);
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  assert(colorRenderbuffer);
+  glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
+  BOOL success = [context presentRenderbuffer:GL_RENDERBUFFER];
+  assert(success == YES);
+  glBindRenderbuffer(GL_RENDERBUFFER, 0);
+  glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 

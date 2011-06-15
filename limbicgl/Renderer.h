@@ -20,20 +20,16 @@ class Game;
 
 @interface Renderer : NSObject {
 @private
-    /*dispatch_queue_t queue;
-    BOOL animating;
-    NSInteger animationFrameInterval;
-    CADisplayLink *displayLink;
-    EAGLContext *context, *thread_context;*/
     Game *game_;
-    //NSThread *renderthread;
     RenderTarget *rendertarget;
     id<Driver> driver;
 }
 
-- (void)setLayer:(CAEAGLLayer *)l;
-
+// Called whenever the underlying UIView is re-layouted
+- (void)setLayer:(CAEAGLLayer *)layer;
+// start animating the scene at 60hz
 - (void)startAnimation;
+// stop the animation
 - (void)stopAnimation;
 
 @end
