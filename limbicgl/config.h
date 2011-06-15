@@ -10,6 +10,13 @@
 // This can be used to run gamecenter in a separate GCD queue. This is for testing, and doesn't really seem to have any effect on the stuttering.
 //#define GAMECENTER_WITH_GCD
 
+
+#define SINGLETHREADEDDRIVER 0
+#define GCDDRIVER 1
+#define THREADEDDRIVER 2
+// Specifies with Driver to use
+#define DRIVER SINGLETHREADEDDRIVER
+
 // This can be used to get very verbose traces for debugging
 //#define VERBOSE_LOG
 

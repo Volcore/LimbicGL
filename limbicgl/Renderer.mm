@@ -14,6 +14,7 @@
 #import "RenderTarget.h"
 
 #import "SingleThreadDriver.h"
+#include <limbicgl/config.h>
 
 
 @interface Renderer()
@@ -89,9 +90,13 @@
     if (self) {
         game_ = new Game();
         rendertarget = [[RenderTarget alloc] init];
+#if DRIVER == GCDDRIVER
+        driver = [[GCDDriver alloc] initWithRenderTarget:rendertarget andGame:game_];
+#elif DRIVER == THREADEDDRIVER
+        driver = [[ThreadedDriver alloc] initWithRenderTarget:rendertarget andGame:game_];        
+#else
         driver = [[SingleThreadDriver alloc] initWithRenderTarget:rendertarget andGame:game_];
-        //driver = [[GCDDriver alloc] initWithRenderTarget:rendertarget andGame:game_];
-        //driver = [[ThreadedDriver alloc] initWithRenderTarget:rendertarget andGame:game_];        
+#endif
         /*
         animating = NO;
         animationFrameInterval = 1;
