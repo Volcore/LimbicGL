@@ -13,19 +13,21 @@
 #include <limbicgl/game/game.h>
 #import "RenderTarget.h"
 
+#import "SingleThreadDriver.h"
+
 
 @interface Renderer()
-@property (nonatomic, assign) CADisplayLink *displayLink;
-@property (nonatomic, retain) EAGLContext *context;
-- (void)drawFrame;
+//@property (nonatomic, assign) CADisplayLink *displayLink;
+//@property (nonatomic, retain) EAGLContext *context;
+//- (void)drawFrame;
 @end
 
 @implementation Renderer
 
-@synthesize displayLink;
-@synthesize context;
+//@synthesize displayLink;
+//@synthesize context;
 
-- (void)setLayer:(CAEAGLLayer *)l {
+/*- (void)setLayer:(CAEAGLLayer *)l {
   // Set layer is called every time the underlying view is updated/layouted
   // This means the renderbuffers need to be re-allocated
   NSLog(@"setLayer called");
@@ -76,17 +78,24 @@
   [thread_context release];
   [pool release];
   NSLog(@"Shutting down animation thread...");
+}*/
+
+- (void)setLayer:(CAEAGLLayer *)layer {
+  [driver setLayer:layer];
 }
 
-- (id)init
-{
-    NSLog(@"Init");
+- (id)init {
     self = [super init];
     if (self) {
+        game_ = new Game();
+        rendertarget = [[RenderTarget alloc] init];
+        driver = [[SingleThreadDriver alloc] initWithRenderTarget:rendertarget andGame:game_];
+        //driver = [[GCDDriver alloc] initWithRenderTarget:rendertarget andGame:game_];
+        //driver = [[ThreadedDriver alloc] initWithRenderTarget:rendertarget andGame:game_];        
+        /*
         animating = NO;
         animationFrameInterval = 1;
         self.displayLink = nil;
-        rendertarget = [[RenderTarget alloc] init];
         NSLog(@"Creating queue");
         queue = dispatch_queue_create("com.limbic.gltest.renderingqueue", 0);
         //queue = dispatch_get_main_queue();
@@ -101,16 +110,16 @@
             self.context = aContext;
             [aContext release];
             [EAGLContext setCurrentContext:nil];
-        game_ = new Game();
+
         //});
         //dispatch_async(queue, ^{
           //NSLog(@"Allocating thread context");
           //thread_context = [[EAGLContext alloc] initWithAPI:self.context.API sharegroup:self.context.sharegroup];
-        //});
+        //});*/
     }
     return self;
 }
-
+/*
 - (void) tearDown {
     NSLog(@"Teardown called");
     // Synchronosuly tear down
@@ -126,18 +135,19 @@
         context = nil;
     }
     //});
-}
+}*/
 
 - (void) dealloc {
-    NSLog(@"Dealloc called");
-    //[self tearDown];
-    //dispatch_release(queue);
+    delete game_;
+    [driver teardown];
+    [(NSObject*)driver release];
     [rendertarget release];
     [super dealloc];
 }
 
 - (void) startAnimation {
-    NSLog(@"startAnimation called");
+    [driver startAnimation];
+    /*NSLog(@"startAnimation called");
     if (!animating) {
         NSLog(@"Creating display link...");
         // Create the thread
@@ -148,21 +158,22 @@
         [aDisplayLink setFrameInterval:animationFrameInterval];
         NSRunLoop *loop = [NSRunLoop currentRunLoop];
         [aDisplayLink addToRunLoop:loop forMode:NSRunLoopCommonModes];
-        self.displayLink = aDisplayLink;*/
-    }
+        self.displayLink = aDisplayLink;//* /
+    }*/
 }
 
 - (void) stopAnimation {
-    NSLog(@"stopAnimation called");
+    [driver stopAnimation];
+    /*NSLog(@"stopAnimation called");
     if (animating) {
         NSLog(@"freeing stopAnimation");
         //[self.displayLink invalidate];
         //self.displayLink = nil;
         animating = FALSE;
         self.displayLink.paused = YES;
-    }
+    }*/
 }
-
+/*
 - (void)drawFrame {
       //NSLog(@"drawFrame called");
     //assert(dispatch_get_current_queue() == queue);
@@ -189,6 +200,6 @@
             //NSLog(@"Drawing frame done");
        //}
     });
-}
+}*/
 
 @end

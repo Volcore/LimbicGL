@@ -10,4 +10,14 @@
 // This can be used to run gamecenter in a separate GCD queue. This is for testing, and doesn't really seem to have any effect on the stuttering.
 //#define GAMECENTER_WITH_GCD
 
+// This can be used to get very verbose traces for debugging
+//#define VERBOSE_LOG
+
+#ifdef VERBOSE_LOG
+#   define VerboseLog(fmt, ...) NSLog((@"%s " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__);
+#else
+#   define VerboseLog(...)
+#endif
+
+
 #endif  // LIMBICGL_CONFIG_H_

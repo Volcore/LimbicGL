@@ -12,6 +12,7 @@
 
 #import "EAGLView.h"
 #import "Renderer.h"
+#include <limbicgl/config.h>
 
 @implementation EAGLView
 
