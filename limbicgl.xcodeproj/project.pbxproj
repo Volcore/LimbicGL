@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F54D06813A7E2EF00BCAB6B /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06313A7E2EF00BCAB6B /* EAGLView.m */; };
-		9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */; };
+		9F54D06813A7E2EF00BCAB6B /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06313A7E2EF00BCAB6B /* EAGLView.mm */; };
+		9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.mm */; };
 		9F54D06A13A7E2EF00BCAB6B /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06713A7E2EF00BCAB6B /* Renderer.mm */; };
 		9F97063213A7E4DF00EDA5B8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F97063113A7E4DF00EDA5B8 /* GameKit.framework */; };
 		9F97064513A7E66100EDA5B8 /* glprogram.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9F97063F13A7E66100EDA5B8 /* glprogram.cc */; };
@@ -23,16 +23,15 @@
 		9FBA944A13A7E2970080071B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944913A7E2970080071B /* main.m */; };
 		9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */; };
 		9FBA945013A7E2970080071B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA944E13A7E2970080071B /* MainWindow.xib */; };
-		9FBA945213A7E2970080071B /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945113A7E2970080071B /* Shader.fsh */; };
-		9FBA945413A7E2970080071B /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945313A7E2970080071B /* Shader.vsh */; };
 		9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */; };
+		9FEF560A13A82EC600C9A484 /* game.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF560813A82EC600C9A484 /* game.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9F54D06213A7E2EF00BCAB6B /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
-		9F54D06313A7E2EF00BCAB6B /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		9F54D06313A7E2EF00BCAB6B /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
 		9F54D06413A7E2EF00BCAB6B /* LimbicGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LimbicGLViewController.h; sourceTree = "<group>"; };
-		9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LimbicGLViewController.m; sourceTree = "<group>"; };
+		9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LimbicGLViewController.mm; sourceTree = "<group>"; };
 		9F54D06613A7E2EF00BCAB6B /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		9F54D06713A7E2EF00BCAB6B /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
 		9F97063113A7E4DF00EDA5B8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -55,9 +54,10 @@
 		9FBA944B13A7E2970080071B /* LimbicGLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LimbicGLAppDelegate.h; sourceTree = "<group>"; };
 		9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LimbicGLAppDelegate.m; sourceTree = "<group>"; };
 		9FBA944F13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		9FBA945113A7E2970080071B /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		9FBA945313A7E2970080071B /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		9FBA945C13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LimbicGLViewController.xib; sourceTree = "<group>"; };
+		9FEF560613A82C5700C9A484 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		9FEF560813A82EC600C9A484 /* game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = game.mm; sourceTree = "<group>"; };
+		9FEF560913A82EC600C9A484 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,16 +124,16 @@
 		9FBA944213A7E2970080071B /* limbicgl */ = {
 			isa = PBXGroup;
 			children = (
+				9FEF560713A82EC600C9A484 /* game */,
+				9FEF560613A82C5700C9A484 /* config.h */,
 				9FBA944B13A7E2970080071B /* LimbicGLAppDelegate.h */,
 				9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */,
 				9FBA944E13A7E2970080071B /* MainWindow.xib */,
-				9FBA945113A7E2970080071B /* Shader.fsh */,
-				9FBA945313A7E2970080071B /* Shader.vsh */,
 				9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */,
 				9F54D06213A7E2EF00BCAB6B /* EAGLView.h */,
-				9F54D06313A7E2EF00BCAB6B /* EAGLView.m */,
+				9F54D06313A7E2EF00BCAB6B /* EAGLView.mm */,
 				9F54D06413A7E2EF00BCAB6B /* LimbicGLViewController.h */,
-				9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.m */,
+				9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.mm */,
 				9F54D06613A7E2EF00BCAB6B /* Renderer.h */,
 				9F54D06713A7E2EF00BCAB6B /* Renderer.mm */,
 				9FBA944313A7E2970080071B /* Supporting Files */,
@@ -150,6 +150,15 @@
 				9FBA944913A7E2970080071B /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9FEF560713A82EC600C9A484 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF560813A82EC600C9A484 /* game.mm */,
+				9FEF560913A82EC600C9A484 /* game.h */,
+			);
+			path = game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,8 +213,6 @@
 			files = (
 				9FBA944713A7E2970080071B /* InfoPlist.strings in Resources */,
 				9FBA945013A7E2970080071B /* MainWindow.xib in Resources */,
-				9FBA945213A7E2970080071B /* Shader.fsh in Resources */,
-				9FBA945413A7E2970080071B /* Shader.vsh in Resources */,
 				9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,12 +226,13 @@
 			files = (
 				9FBA944A13A7E2970080071B /* main.m in Sources */,
 				9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */,
-				9F54D06813A7E2EF00BCAB6B /* EAGLView.m in Sources */,
-				9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.m in Sources */,
+				9F54D06813A7E2EF00BCAB6B /* EAGLView.mm in Sources */,
+				9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.mm in Sources */,
 				9F54D06A13A7E2EF00BCAB6B /* Renderer.mm in Sources */,
 				9F97064513A7E66100EDA5B8 /* glprogram.cc in Sources */,
 				9F97064613A7E66100EDA5B8 /* glshader.cc in Sources */,
 				9F97064713A7E66100EDA5B8 /* performancemonitor.cc in Sources */,
+				9FEF560A13A82EC600C9A484 /* game.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

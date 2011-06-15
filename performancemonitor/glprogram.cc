@@ -10,7 +10,8 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
-//#define DEBUG_PROGRAM
+#define DEBUG_PROGRAM
+#define VALIDATE_PROGRAM
 
 GLProgram::GLProgram()
     : program_(0) {

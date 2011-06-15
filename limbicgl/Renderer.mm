@@ -10,25 +10,8 @@
 
 #import "Renderer.h"
 #include <performancemonitor/performancemonitor.h>
+#include <limbicgl/game/game.h>
 
-#define ARC4RANDOM_MAX (0x100000000ull)
-static double randomDouble() {
-  return double(arc4random())/double(ARC4RANDOM_MAX);
-}
-
-// Uniform index.
-enum {
-    UNIFORM_TRANSLATE,
-    NUM_UNIFORMS
-};
-GLint uniforms[NUM_UNIFORMS];
-
-// Attribute index.
-enum {
-    ATTRIB_VERTEX,
-    ATTRIB_COLOR,
-    NUM_ATTRIBUTES
-};
 
 @interface Renderer()
 @property (nonatomic, assign) CADisplayLink *displayLink;
@@ -37,11 +20,7 @@ enum {
 - (void)setFramebuffer;
 - (void)presentFramebuffer;
 - (void)deleteFramebuffer;
-// Actual rendering stuff
-- (BOOL)loadShaders;
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
-- (BOOL)linkProgram:(GLuint)prog;
-- (BOOL)validateProgram:(GLuint)prog;
+- (void)drawFrame;
 @end
 
 @implementation Renderer
@@ -65,17 +44,40 @@ enum {
   }
 }
 
+- (void)newTriggerDrawFrame {
+  @synchronized(context) {
+    PerformanceMonitor *pm = PerformanceMonitor::Shared();
+    pm->FrameStart();
+    BOOL res = [EAGLContext setCurrentContext:thread_context];
+    assert(res == YES);
+    [self drawFrame];
+    glFlush();
+    [EAGLContext setCurrentContext:nil];
+    pm->FrameEnd();
+    pm->UpdateStart();
+    game_->Update();
+    pm->UpdateEnd();
+  }
+}
 
 - (void) threadMainLoop {
-  NSLog(@"Entering thread main loop...");
-  [NSThread sleepForTimeInterval:1.0];
+  renderthread = [NSThread currentThread];
+  NSLog(@"Entering animation thread...");
   NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
   NSRunLoop* loop = [NSRunLoop currentRunLoop];
-  CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+  CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(newTriggerDrawFrame)];
   [aDisplayLink setFrameInterval:1];
-  [aDisplayLink addToRunLoop:loop forMode:NSRunLoopCommonModes];
-  [loop run];
+  [aDisplayLink addToRunLoop:loop forMode:NSDefaultRunLoopMode];
+  aDisplayLink.paused = YES;
+  displayLink = aDisplayLink;
+  thread_context = [[EAGLContext alloc] initWithAPI:self.context.API sharegroup:self.context.sharegroup];
+  [NSThread sleepForTimeInterval:1.0];
+  // run the loop one event at a time
+  while (animating && [loop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+  // clean up
+  [thread_context release];
   [pool release];
+  NSLog(@"Shutting down animation thread...");
 }
 
 - (id)init
@@ -99,14 +101,14 @@ enum {
                 NSLog(@"Failed to set ES context current");
             self.context = aContext;
             [aContext release];
-      [self loadShaders];
-      glFlush();
             [EAGLContext setCurrentContext:nil];
+        game_ = new Game();
+        [NSThread detachNewThreadSelector:@selector(threadMainLoop) toTarget:self withObject:nil];
         //});
-        dispatch_async(queue, ^{
-          NSLog(@"Allocating thread context");
-          thread_context = [[EAGLContext alloc] initWithAPI:self.context.API sharegroup:self.context.sharegroup];
-        });
+        //dispatch_async(queue, ^{
+          //NSLog(@"Allocating thread context");
+          //thread_context = [[EAGLContext alloc] initWithAPI:self.context.API sharegroup:self.context.sharegroup];
+        //});
     }
     return self;
 }
@@ -144,13 +146,13 @@ enum {
     if (!animating) {
         NSLog(@"Creating display link...");
         // Create the thread
-        //[NSThread detachNewThreadSelector:@selector(threadMainLoop) toTarget:self withObject:nil];
-        CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
+        animating = TRUE;
+        self.displayLink.paused = NO;
+        /*CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(triggerDrawFrame)];
         [aDisplayLink setFrameInterval:animationFrameInterval];
         NSRunLoop *loop = [NSRunLoop currentRunLoop];
         [aDisplayLink addToRunLoop:loop forMode:NSRunLoopCommonModes];
-        self.displayLink = aDisplayLink;
-        animating = TRUE;
+        self.displayLink = aDisplayLink;*/
     }
 }
 
@@ -158,9 +160,10 @@ enum {
     NSLog(@"stopAnimation called");
     if (animating) {
         NSLog(@"freeing stopAnimation");
-        [self.displayLink invalidate];
-        self.displayLink = nil;
+        //[self.displayLink invalidate];
+        //self.displayLink = nil;
         animating = FALSE;
+        self.displayLink.paused = YES;
     }
 }
 
@@ -182,63 +185,16 @@ enum {
 
 
 - (void)drawFrame {
-    PerformanceMonitor *pm = PerformanceMonitor::Shared();
-    pm->FrameStart();
       //NSLog(@"drawFrame called");
     //assert(dispatch_get_current_queue() == queue);
     [self setFramebuffer];
-    // Replace the implementation of this method to do your own custom drawing.
-    static const GLfloat squareVertices[] = {
-        -0.5f, -0.33f,
-        0.5f, -0.33f,
-        -0.5f,  0.33f,
-        0.5f,  0.33f,
-    };
-    
-    static const GLubyte squareColors[] = {
-        255, 255,   0, 255,
-        0,   255, 255, 255,
-        0,     0,   0,   0,
-        255,   0, 255, 255,
-    };
-    
-    static float transY = 0.0f;
-    
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-    // Use shader program.
-    glUseProgram(program);
-    // Update uniform value.
-    glUniform1f(uniforms[UNIFORM_TRANSLATE], (GLfloat)transY);
-    transY += 0.075f;	
-    // Update attribute values.
-    glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, squareVertices);
-    glEnableVertexAttribArray(ATTRIB_VERTEX);
-    glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, 1, 0, squareColors);
-    glEnableVertexAttribArray(ATTRIB_COLOR);
-    
-    // Validate program before drawing. This is a good check, but only really necessary in a debug build.
-    // DEBUG macro must be defined in your debug configurations if that's not already the case.
-#if defined(DEBUG)
-    if (![self validateProgram:program]) {
-        NSLog(@"Failed to validate program: %d", program);
-        return;
-    }
-#endif
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    pm->Draw(framebufferWidth, framebufferHeight);
-    [self presentFramebuffer];
+    game_->Draw();
+    PerformanceMonitor::Shared()->Draw(framebufferWidth, framebufferHeight);
     GLenum error = glGetError();
     if (error != GL_NO_ERROR) {
-        NSLog(@"Error: %i", error);
+        NSLog(@"Error during draw: %i", error);
     }
-      //NSLog(@"drawFrame done");
-    pm->FrameEnd();
-    pm->UpdateStart();
-    double delay = 0.005 * randomDouble(); // between 0 and 5 ms delay
-    [NSThread sleepForTimeInterval:delay];
-    pm->UpdateEnd();
+    [self presentFramebuffer];
 }
 
 - (void)triggerDrawFrame {
@@ -296,22 +252,6 @@ enum {
     }
 }
 
-- (void)asyncDeleteFramebuffer {
-  
-    NSLog(@"asyncDeleteFramebuffer called");
-    dispatch_async(queue, ^{
-        NSLog(@"asyncDeleteFramebuffer run");
-        @synchronized(thread_context) {
-            BOOL res = [EAGLContext setCurrentContext:thread_context];
-            assert(res == YES);
-            [self deleteFramebuffer];
-            glFlush();
-            [EAGLContext setCurrentContext:nil];
-        }
-    });
-}
-
-
 - (void)setFramebuffer {
     assert(defaultFramebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
@@ -324,161 +264,6 @@ enum {
     assert(success == YES);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
-
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file {
-    //assert(dispatch_get_current_queue() == queue);
-    GLint status;
-    const GLchar *source;
-    
-    source = (GLchar *)[[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil] UTF8String];
-    if (!source)
-    {
-        NSLog(@"Failed to load vertex shader");
-        return FALSE;
-    }
-    
-    *shader = glCreateShader(type);
-    glShaderSource(*shader, 1, &source, NULL);
-    glCompileShader(*shader);
-    
-#if defined(DEBUG)
-    GLint logLength;
-    glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0)
-    {
-        GLchar *log = (GLchar *)malloc(logLength);
-        glGetShaderInfoLog(*shader, logLength, &logLength, log);
-        NSLog(@"Shader compile log:\n%s", log);
-        free(log);
-    }
-#endif
-    
-    glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
-    if (status == 0)
-    {
-        glDeleteShader(*shader);
-        return FALSE;
-    }
-    
-    return TRUE;
-}
-
-- (BOOL)linkProgram:(GLuint)prog {
-    //assert(dispatch_get_current_queue() == queue);
-    GLint status;
-    
-    glLinkProgram(prog);
-    
-#if defined(DEBUG)
-    GLint logLength;
-    glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0)
-    {
-        GLchar *log = (GLchar *)malloc(logLength);
-        glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program link log:\n%s", log);
-        free(log);
-    }
-#endif
-    
-    glGetProgramiv(prog, GL_LINK_STATUS, &status);
-    if (status == 0)
-        return FALSE;
-    
-    return TRUE;
-}
-
-- (BOOL)validateProgram:(GLuint)prog {
-    GLint logLength = 0, status = 1;
-    
-    glValidateProgram(prog);
-    glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0)
-    {
-        GLchar *log = (GLchar *)malloc(logLength);
-        glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program validate log:\n%s", log);
-        free(log);
-    }
-    
-    glGetProgramiv(prog, GL_VALIDATE_STATUS, &status);
-    if (status == 0)
-        return FALSE;
-    
-    return TRUE;
-}
-
-- (BOOL)loadShaders {
-    //assert(dispatch_get_current_queue() == queue);
-    GLuint vertShader, fragShader;
-    NSString *vertShaderPathname, *fragShaderPathname;
-    
-    // Create shader program.
-    program = glCreateProgram();
-    
-    // Create and compile vertex shader.
-    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
-    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname])
-    {
-        NSLog(@"Failed to compile vertex shader");
-        return FALSE;
-    }
-    
-    // Create and compile fragment shader.
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];
-    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname])
-    {
-        NSLog(@"Failed to compile fragment shader");
-        return FALSE;
-    }
-    
-    // Attach vertex shader to program.
-    glAttachShader(program, vertShader);
-    
-    // Attach fragment shader to program.
-    glAttachShader(program, fragShader);
-    
-    // Bind attribute locations.
-    // This needs to be done prior to linking.
-    glBindAttribLocation(program, ATTRIB_VERTEX, "position");
-    glBindAttribLocation(program, ATTRIB_COLOR, "color");
-    
-    // Link program.
-    if (![self linkProgram:program])
-    {
-        NSLog(@"Failed to link program: %d", program);
-        
-        if (vertShader)
-        {
-            glDeleteShader(vertShader);
-            vertShader = 0;
-        }
-        if (fragShader)
-        {
-            glDeleteShader(fragShader);
-            fragShader = 0;
-        }
-        if (program)
-        {
-            glDeleteProgram(program);
-            program = 0;
-        }
-        
-        return FALSE;
-    }
-    
-    // Get uniform locations.
-    uniforms[UNIFORM_TRANSLATE] = glGetUniformLocation(program, "translate");
-    
-    // Release vertex and fragment shaders.
-    if (vertShader)
-        glDeleteShader(vertShader);
-    if (fragShader)
-        glDeleteShader(fragShader);
-    
-    return TRUE;
 }
 
 @end

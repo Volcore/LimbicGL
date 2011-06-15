@@ -36,9 +36,6 @@ static inline double TimeSince(double then) {
 }
 /////////////////////////////////////////////////
 
-// PGL export hack
-//static GLProgram *gpu_program;
-
 const char *const vertex_shader_source = "\
 attribute vec3 att_position;\
 attribute vec4 att_color;\
@@ -66,7 +63,6 @@ PerformanceMonitor::PerformanceMonitor()
   memset(update_times_, 0, sizeof(update_times_));
   memset(total_frame_times_, 0, sizeof(total_frame_times_));
   memset(triangle_counts_, 0, sizeof(triangle_counts_));
-  gpu_program = GLProgram::FromText(vertex_shader_source, fragment_shader_source);
 }
 
 PerformanceMonitor::~PerformanceMonitor() {
@@ -123,6 +119,9 @@ static float points[NUM_VERTICES];
 static unsigned short indices[NUM_INDICES];
 
 void PerformanceMonitor::Draw(int width, int height, PMDrawMode mode) {
+  if (gpu_program == 0){
+    gpu_program = GLProgram::FromText(vertex_shader_source, fragment_shader_source);
+  }
   float scale = float(width)/float(PM_HISTORY_LENGTH);
   float yscale = 1.0f;
   // 1 pixel = 100 triangle
@@ -208,29 +207,15 @@ void PerformanceMonitor::Draw(int width, int height, PMDrawMode mode) {
   for (int i=0; i<NUM_INDICES; ++i) {
     indices[i] = i;
   }
-  // Fetch old states
-  int vao = 0, vbo = 0, ibo = 0;
-  glGetIntegerv(GL_VERTEX_ARRAY_BINDING_OES, &vao);
-  glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &vbo);
-  glGetIntegerv(GL_ELEMENT_ARRAY_BUFFER_BINDING, &ibo);
-  // TODO: ideally, all opengl states should be saved, reset, and then modified here.
-  //       it seems to be a lot of work in ES2, though, so we'll keep this here as long as it works
-  // Start the rendering
-  glBindVertexArrayOES(0);
+  //  NOTE: if you want to use this in your app, and you use state caching, you should flush all gl states, and then reset them after the rendering is done.
   gpu_program->Use();
   int position_attrib = gpu_program->GetAttribLocation("att_position");
   int att_color = gpu_program->GetAttribLocation("att_color");
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
   glVertexAttribPointer(position_attrib, 2, GL_FLOAT, false, 5*sizeof(float), (GLvoid*)points);
   glEnableVertexAttribArray(position_attrib);
   glVertexAttribPointer(att_color, 3, GL_FLOAT, false, 5*sizeof(float), (GLvoid*)(points+2));
   glEnableVertexAttribArray(att_color);
   glDrawElements(GL_LINES, sizeof(indices)/sizeof(unsigned short), GL_UNSIGNED_SHORT, indices);
-  // Reset old states
-  glBindVertexArrayOES(vao);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 }
 
 #endif

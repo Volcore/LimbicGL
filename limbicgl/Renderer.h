@@ -13,6 +13,8 @@
 
 @class CAEAGLLayer;
 
+class Game;
+
 @interface Renderer : NSObject {
 @private
     dispatch_queue_t queue;
@@ -26,6 +28,8 @@
     GLuint defaultFramebuffer, colorRenderbuffer;
     EAGLContext *context, *thread_context;
     GLuint program;
+    Game *game_;
+    NSThread *renderthread;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
@@ -36,7 +40,5 @@
 
 - (void)startAnimation;
 - (void)stopAnimation;
-
-- (void)asyncDeleteFramebuffer;
 
 @end
