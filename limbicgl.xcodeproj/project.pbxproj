@@ -24,6 +24,7 @@
 		9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */; };
 		9FBA945013A7E2970080071B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA944E13A7E2970080071B /* MainWindow.xib */; };
 		9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */; };
+		9FED698513A877E90022C002 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FED698313A877E90022C002 /* MainWindow-iPad.xib */; };
 		9FEF560A13A82EC600C9A484 /* game.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF560813A82EC600C9A484 /* game.mm */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,8 @@
 		9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LimbicGLAppDelegate.m; sourceTree = "<group>"; };
 		9FBA944F13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		9FBA945C13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LimbicGLViewController.xib; sourceTree = "<group>"; };
+		9FED698413A877E90022C002 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		9FED698613A878350022C002 /* codingguides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codingguides.h; path = performancemonitor/codingguides.h; sourceTree = SOURCE_ROOT; };
 		9FEF560613A82C5700C9A484 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		9FEF560813A82EC600C9A484 /* game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = game.mm; sourceTree = "<group>"; };
 		9FEF560913A82EC600C9A484 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 		9F97063E13A7E66100EDA5B8 /* performancemonitor */ = {
 			isa = PBXGroup;
 			children = (
+				9FED698613A878350022C002 /* codingguides.h */,
 				9F97063F13A7E66100EDA5B8 /* glprogram.cc */,
 				9F97064013A7E66100EDA5B8 /* glprogram.h */,
 				9F97064113A7E66100EDA5B8 /* glshader.cc */,
@@ -124,6 +128,7 @@
 		9FBA944213A7E2970080071B /* limbicgl */ = {
 			isa = PBXGroup;
 			children = (
+				9FED698213A877E80022C002 /* iPad */,
 				9FEF560713A82EC600C9A484 /* game */,
 				9FEF560613A82C5700C9A484 /* config.h */,
 				9FBA944B13A7E2970080071B /* LimbicGLAppDelegate.h */,
@@ -150,6 +155,14 @@
 				9FBA944913A7E2970080071B /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9FED698213A877E80022C002 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				9FED698313A877E90022C002 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 		9FEF560713A82EC600C9A484 /* game */ = {
@@ -214,6 +227,7 @@
 				9FBA944713A7E2970080071B /* InfoPlist.strings in Resources */,
 				9FBA945013A7E2970080071B /* MainWindow.xib in Resources */,
 				9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */,
+				9FED698513A877E90022C002 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +275,14 @@
 				9FBA945C13A7E2970080071B /* en */,
 			);
 			name = LimbicGLViewController.xib;
+			sourceTree = "<group>";
+		};
+		9FED698313A877E90022C002 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FED698413A877E90022C002 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -313,7 +335,9 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -329,7 +353,9 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
