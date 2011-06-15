@@ -46,15 +46,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    [renderer tearDown];
-}
-
-- (NSInteger)animationFrameInterval {
-    return [renderer animationFrameInterval];
-}
-
-- (void)setAnimationFrameInterval:(NSInteger)frameInterval {
-    [renderer setAnimationFrameInterval:frameInterval];
 }
 
 - (void)startAnimation {

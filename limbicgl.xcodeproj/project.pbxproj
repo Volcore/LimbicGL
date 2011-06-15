@@ -25,6 +25,7 @@
 		9FBA945013A7E2970080071B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA944E13A7E2970080071B /* MainWindow.xib */; };
 		9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */; };
 		9FED698513A877E90022C002 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FED698313A877E90022C002 /* MainWindow-iPad.xib */; };
+		9FED698A13A87B260022C002 /* RenderTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FED698913A87B260022C002 /* RenderTarget.m */; };
 		9FEF560A13A82EC600C9A484 /* game.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF560813A82EC600C9A484 /* game.mm */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,8 @@
 		9FBA945C13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LimbicGLViewController.xib; sourceTree = "<group>"; };
 		9FED698413A877E90022C002 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		9FED698613A878350022C002 /* codingguides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codingguides.h; path = performancemonitor/codingguides.h; sourceTree = SOURCE_ROOT; };
+		9FED698813A87B260022C002 /* RenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderTarget.h; sourceTree = "<group>"; };
+		9FED698913A87B260022C002 /* RenderTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderTarget.m; sourceTree = "<group>"; };
 		9FEF560613A82C5700C9A484 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		9FEF560813A82EC600C9A484 /* game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = game.mm; sourceTree = "<group>"; };
 		9FEF560913A82EC600C9A484 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		9FBA944213A7E2970080071B /* limbicgl */ = {
 			isa = PBXGroup;
 			children = (
+				9FED698713A87A0E0022C002 /* drivers */,
 				9FED698213A877E80022C002 /* iPad */,
 				9FEF560713A82EC600C9A484 /* game */,
 				9FEF560613A82C5700C9A484 /* config.h */,
@@ -142,6 +146,8 @@
 				9F54D06613A7E2EF00BCAB6B /* Renderer.h */,
 				9F54D06713A7E2EF00BCAB6B /* Renderer.mm */,
 				9FBA944313A7E2970080071B /* Supporting Files */,
+				9FED698813A87B260022C002 /* RenderTarget.h */,
+				9FED698913A87B260022C002 /* RenderTarget.m */,
 			);
 			path = limbicgl;
 			sourceTree = "<group>";
@@ -163,6 +169,13 @@
 				9FED698313A877E90022C002 /* MainWindow-iPad.xib */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		9FED698713A87A0E0022C002 /* drivers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = drivers;
 			sourceTree = "<group>";
 		};
 		9FEF560713A82EC600C9A484 /* game */ = {
@@ -247,6 +260,7 @@
 				9F97064613A7E66100EDA5B8 /* glshader.cc in Sources */,
 				9F97064713A7E66100EDA5B8 /* performancemonitor.cc in Sources */,
 				9FEF560A13A82EC600C9A484 /* game.mm in Sources */,
+				9FED698A13A87B260022C002 /* RenderTarget.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

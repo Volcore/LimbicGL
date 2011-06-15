@@ -12,6 +12,7 @@
 #import <OpenGLES/ES2/glext.h>
 
 @class CAEAGLLayer;
+@class RenderTarget;
 
 class Game;
 
@@ -21,22 +22,13 @@ class Game;
     BOOL animating;
     NSInteger animationFrameInterval;
     CADisplayLink *displayLink;
-    // The pixel dimensions of the CAEAGLLayer.
-    GLint framebufferWidth;
-    GLint framebufferHeight;
-    // The OpenGL ES names for the framebuffer and renderbuffer used to render to this view.
-    GLuint defaultFramebuffer, colorRenderbuffer;
     EAGLContext *context, *thread_context;
-    GLuint program;
     Game *game_;
     NSThread *renderthread;
+    RenderTarget *rendertarget;
 }
 
-@property (readonly, nonatomic, getter=isAnimating) BOOL animating;
-@property (nonatomic) NSInteger animationFrameInterval;
-@property (nonatomic, retain) CAEAGLLayer *layer;
-
-- (void)tearDown;
+- (void)setLayer:(CAEAGLLayer *)l;
 
 - (void)startAnimation;
 - (void)stopAnimation;

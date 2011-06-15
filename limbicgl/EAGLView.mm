@@ -53,17 +53,25 @@
     [renderer setLayer:(CAEAGLLayer*)self.layer];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-  UITouch *touch = [touches anyObject];
-  if ([touch tapCount] == 2) {
-    dispatch_queue_t queue = dispatch_queue_create("com.limbic.gltest.gamecenterqueue", 0);
-    dispatch_async(queue, ^{
+- (void)gcAuth {
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
-      NSLog(@"Authenticate GKLocalPlayer with error: %@", error);
+        NSLog(@"Authenticate GKLocalPlayer with error: %@", error);
     }];
-    });
-    dispatch_release(queue);
-  }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    if ([touch tapCount] == 2) {
+#ifdef GAMECENTER_WITH_GCD
+        dispatch_queue_t queue = dispatch_queue_create("com.limbic.gltest.gamecenterqueue", 0);
+        dispatch_async(queue, ^{
+            [self gcAuth];
+        });
+        dispatch_release(queue);
+#else
+        [self gcAuth];
+#endif
+    }
 }
 
 @end
