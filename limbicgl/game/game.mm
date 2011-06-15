@@ -18,10 +18,11 @@ const char *const vertex_shader_source = "\
 attribute vec3 att_position;\
 attribute vec4 att_color;\
 varying vec4 var_color;\
-uniform float translate;\
+uniform vec3 translate;\
 void main() {\
   gl_Position = vec4(att_position, 1);\
-  gl_Position.y += sin(translate)/2.0;\
+  gl_Position.x += translate.z*cos(translate.x)/2.0;\
+  gl_Position.y += translate.z*sin(translate.y)/2.0;\
   var_color = att_color;\
 }";
 
@@ -64,12 +65,11 @@ void Game::Draw() {
   int position_attrib = program_->GetAttribLocation("att_position");
   int att_color = program_->GetAttribLocation("att_color");
   int translate = program_->GetUniformLocation("translate");
-  program_->SetUniformf(translate, float(fmod(CFAbsoluteTimeGetCurrent(), 1000.0)));
   float points[] = {
-    -0.5f, -0.33f, 1.0f, 1.0f, 0.0f,
-     0.5f, -0.33f, 0.0f, 1.0f, 1.0f, 
-    -0.5f,  0.33f, 0.0f, 0.0f, 0.0f,
-     0.5f,  0.33f, 1.0f, 0.0f, 1.0f,
+    -0.05f, -0.05f, 1.0f, 1.0f, 0.0f,
+     0.05f, -0.05f, 0.0f, 1.0f, 1.0f, 
+    -0.05f,  0.05f, 0.0f, 0.0f, 0.0f,
+     0.05f,  0.05f, 1.0f, 0.0f, 1.0f,
   };
   unsigned short indices[] = {
     0, 1, 2, 
@@ -79,7 +79,15 @@ void Game::Draw() {
   glEnableVertexAttribArray(position_attrib);
   glVertexAttribPointer(att_color, 3, GL_FLOAT, false, 5*sizeof(float), (GLvoid*)(points+2));
   glEnableVertexAttribArray(att_color);
-  glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(unsigned short), GL_UNSIGNED_SHORT, indices);
+  float base_t = float(fmod(CFAbsoluteTimeGetCurrent(), 1000.0));
+  const int num_quads = 1000;
+  for (int i=0; i<num_quads; ++i) {
+    float x = base_t*1.0f+i*11.0f;
+    float y = base_t*3.0f+i*3.0f;
+    float z = (float(i+1)/float(num_quads))*1.5f;
+    program_->SetUniformf(translate, x, y, z);
+    glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(unsigned short), GL_UNSIGNED_SHORT, indices);
+  }
 }
 
 void Game::InitGFX() {
