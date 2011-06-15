@@ -14,6 +14,8 @@
 #import "RenderTarget.h"
 
 #import "SingleThreadDriver.h"
+#import "ThreadedDriver.h"
+#import "GCDDriver.h"
 #include <limbicgl/config.h>
 
 

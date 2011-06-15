@@ -9,15 +9,13 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "RenderTarget.h"
+#import "config.h"
 
 
 @implementation RenderTarget
 
 - (void)createFramebuffer:(CAEAGLLayer*)layer forContext:(EAGLContext*)context {
-    NSLog(@"createFramebuffer called");
-    //assert(dispatch_get_current_queue() == queue);
     if (!defaultFramebuffer) {
-        NSLog(@"createFramebuffer run");        
         // Create default framebuffer object.
         glGenFramebuffers(1, &defaultFramebuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
@@ -28,7 +26,7 @@
         [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &framebufferWidth);
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
-        NSLog(@"%i/%i fb size", framebufferWidth, framebufferHeight);
+        VerboseLog(@"%i/%i fb size", framebufferWidth, framebufferHeight);
         
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
         
@@ -39,7 +37,7 @@
 }
 
 - (void)deleteFramebuffer {
-    NSLog(@"deleteFramebuffer called");
+    VerboseLog(@"");
     if (defaultFramebuffer) {
         glDeleteFramebuffers(1, &defaultFramebuffer);
         defaultFramebuffer = 0;

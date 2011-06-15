@@ -15,7 +15,7 @@
 #define GCDDRIVER 1
 #define THREADEDDRIVER 2
 // Specifies with Driver to use
-#define DRIVER SINGLETHREADEDDRIVER
+#define DRIVER THREADEDDRIVER
 
 // This can be used to get very verbose traces for debugging
 //#define VERBOSE_LOG

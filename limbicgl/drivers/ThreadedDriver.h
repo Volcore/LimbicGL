@@ -7,10 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Driver.h"
 
+class Game;
+@class EAGLContext;
 
-@interface ThreadedDriver : NSObject {
-    
+@interface ThreadedDriver : NSObject<Driver> {
+@private
+  EAGLContext *context_;
+  bool animating_;
+  NSThread *renderthread_;
+  RenderTarget *rendertarget_;
+  NSRunLoop *renderloop_;
+  Game *game_;
 }
+
+- (id) initWithRenderTarget:(RenderTarget*)renderTarget andGame:(Game*)game;
+- (void) startAnimation;
+- (void) stopAnimation;
+- (void) teardown;
+- (void) setLayer:(CAEAGLLayer*)layer;
 
 @end
