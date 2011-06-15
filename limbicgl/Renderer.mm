@@ -322,6 +322,8 @@ enum {
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
     BOOL success = [thread_context presentRenderbuffer:GL_RENDERBUFFER];
     assert(success == YES);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 
