@@ -23,4 +23,39 @@ http://www.limbic.com/
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+=== What is this? ===
+
+LimbicGL is a little experiment to test various multi-threading strategies for
+OpenGL on iOS. 
+
+It also includes my performancemonitor which helped a lot in performance
+optimizing Limbic Software's games Nuts! and Zombie Gunship.
+
+=== How to use ===
+
+Open the project in XCode. It should run out of the box.
+
+Check out ./limbicgl/config.h for some configuration values.
+
+You can trigger a GameCenter login by double-tapping the screen.
+
+In order to use the GameCenter stuff, you may have to fiddle with the bundle
+identifier, etc, as it's currently set to com.limbic.limbicgl. You'll have to
+set it to a valid bundle identifier you've set up in iTunes connect.
+
+=== Note ===
+
+Please let me know if you find any issues, and feel free to submit any patches
+or pull requests!
+
+If you like this, please consider checking out our games:
+
+  http://bit.ly/get-nuts
+  http://bit.ly/towermadness
+
 Enjoy! <3
+
+Volker
+http://www.limbic.com
+http://www.twitter.com/volcore
+http://volcore.limbicsoft.com
