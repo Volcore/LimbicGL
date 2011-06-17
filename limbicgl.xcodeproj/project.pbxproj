@@ -10,6 +10,12 @@
 		9F54D06813A7E2EF00BCAB6B /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06313A7E2EF00BCAB6B /* EAGLView.mm */; };
 		9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.mm */; };
 		9F54D06A13A7E2EF00BCAB6B /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06713A7E2EF00BCAB6B /* Renderer.mm */; };
+		9F5E8ECC13AAB23400413A91 /* pvrfile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8ECA13AAB23400413A91 /* pvrfile.mm */; };
+		9F5E8ED613AAD6F000413A91 /* TextureManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8ED513AAD6F000413A91 /* TextureManager.mm */; };
+		9F5E8ED813AAD8AF00413A91 /* checkerboard.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 9F5E8ED713AAD8AF00413A91 /* checkerboard.pvr */; };
+		9F5E8EDB13AAE43F00413A91 /* SyncedTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EDA13AAE43F00413A91 /* SyncedTexture.mm */; };
+		9F5E8EDD13AB28F300413A91 /* limbic_logo.pvr in Resources */ = {isa = PBXBuildFile; fileRef = 9F5E8EDC13AB28F300413A91 /* limbic_logo.pvr */; };
+		9F5E8EE013AB2AD400413A91 /* AsyncTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E8EDF13AB2AD400413A91 /* AsyncTexture.mm */; };
 		9F97063213A7E4DF00EDA5B8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F97063113A7E4DF00EDA5B8 /* GameKit.framework */; };
 		9F97064513A7E66100EDA5B8 /* glprogram.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9F97063F13A7E66100EDA5B8 /* glprogram.cc */; };
 		9F97064613A7E66100EDA5B8 /* glshader.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9F97064113A7E66100EDA5B8 /* glshader.cc */; };
@@ -39,6 +45,16 @@
 		9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LimbicGLViewController.mm; sourceTree = "<group>"; };
 		9F54D06613A7E2EF00BCAB6B /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		9F54D06713A7E2EF00BCAB6B /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		9F5E8ECA13AAB23400413A91 /* pvrfile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = pvrfile.mm; sourceTree = "<group>"; };
+		9F5E8ECB13AAB23400413A91 /* pvrfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvrfile.h; sourceTree = "<group>"; };
+		9F5E8ED413AAD6F000413A91 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
+		9F5E8ED513AAD6F000413A91 /* TextureManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextureManager.mm; sourceTree = "<group>"; };
+		9F5E8ED713AAD8AF00413A91 /* checkerboard.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkerboard.pvr; sourceTree = "<group>"; };
+		9F5E8ED913AAE43F00413A91 /* SyncedTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncedTexture.h; sourceTree = "<group>"; };
+		9F5E8EDA13AAE43F00413A91 /* SyncedTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SyncedTexture.mm; sourceTree = "<group>"; };
+		9F5E8EDC13AB28F300413A91 /* limbic_logo.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; path = limbic_logo.pvr; sourceTree = "<group>"; };
+		9F5E8EDE13AB2AD400413A91 /* AsyncTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncTexture.h; sourceTree = "<group>"; };
+		9F5E8EDF13AB2AD400413A91 /* AsyncTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AsyncTexture.mm; sourceTree = "<group>"; };
 		9F97063113A7E4DF00EDA5B8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		9F97063F13A7E66100EDA5B8 /* glprogram.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glprogram.cc; sourceTree = "<group>"; };
 		9F97064013A7E66100EDA5B8 /* glprogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glprogram.h; sourceTree = "<group>"; };
@@ -93,6 +109,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F5E8EC913AAB23400413A91 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				9F5E8ECA13AAB23400413A91 /* pvrfile.mm */,
+				9F5E8ECB13AAB23400413A91 /* pvrfile.h */,
+				9F5E8ED413AAD6F000413A91 /* TextureManager.h */,
+				9F5E8ED513AAD6F000413A91 /* TextureManager.mm */,
+				9F5E8ED913AAE43F00413A91 /* SyncedTexture.h */,
+				9F5E8EDA13AAE43F00413A91 /* SyncedTexture.mm */,
+				9F5E8EDE13AB2AD400413A91 /* AsyncTexture.h */,
+				9F5E8EDF13AB2AD400413A91 /* AsyncTexture.mm */,
+			);
+			path = textures;
+			sourceTree = "<group>";
+		};
 		9F97063E13A7E66100EDA5B8 /* performancemonitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +172,7 @@
 		9FBA944213A7E2970080071B /* limbicgl */ = {
 			isa = PBXGroup;
 			children = (
+				9F5E8EC913AAB23400413A91 /* textures */,
 				9FED698713A87A0E0022C002 /* drivers */,
 				9FED698213A877E80022C002 /* iPad */,
 				9FEF560713A82EC600C9A484 /* game */,
@@ -165,6 +197,8 @@
 		9FBA944313A7E2970080071B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9F5E8EDC13AB28F300413A91 /* limbic_logo.pvr */,
+				9F5E8ED713AAD8AF00413A91 /* checkerboard.pvr */,
 				9FBA944413A7E2970080071B /* limbicgl-Info.plist */,
 				9FBA944513A7E2970080071B /* InfoPlist.strings */,
 				9FBA944813A7E2970080071B /* limbicgl-Prefix.pch */,
@@ -258,6 +292,8 @@
 				9FBA945013A7E2970080071B /* MainWindow.xib in Resources */,
 				9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */,
 				9FED698513A877E90022C002 /* MainWindow-iPad.xib in Resources */,
+				9F5E8ED813AAD8AF00413A91 /* checkerboard.pvr in Resources */,
+				9F5E8EDD13AB28F300413A91 /* limbic_logo.pvr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +317,10 @@
 				9FCB68BB13A934B900368BE2 /* SingleThreadDriver.mm in Sources */,
 				9FCB68BE13A93DAA00368BE2 /* GCDDriver.mm in Sources */,
 				9FCB68C113A93DB800368BE2 /* ThreadedDriver.mm in Sources */,
+				9F5E8ECC13AAB23400413A91 /* pvrfile.mm in Sources */,
+				9F5E8ED613AAD6F000413A91 /* TextureManager.mm in Sources */,
+				9F5E8EDB13AAE43F00413A91 /* SyncedTexture.mm in Sources */,
+				9F5E8EE013AB2AD400413A91 /* AsyncTexture.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

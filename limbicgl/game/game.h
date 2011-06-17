@@ -10,6 +10,8 @@
 #include <performancemonitor/codingguides.h>
 
 class GLProgram;
+@class TextureManager;
+@protocol Texture;
 
 class Game {
  public:
@@ -21,6 +23,8 @@ class Game {
  private:
   bool gfx_initialized_;
   GLProgram *program_;
+  TextureManager *texture_manager_;
+  id<Texture> textures_[2];
   DISALLOW_COPY_AND_ASSIGN(Game);
 };
 

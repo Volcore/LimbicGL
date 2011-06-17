@@ -16,6 +16,11 @@
 // Specifies with Driver to use
 #define DRIVER GCDDRIVER
 
+// Toggles between synced and async asset loading
+#define ASYNC_ASSET_LOADING
+// Artificial delay for the asset loading to test asyncness
+#define ASSET_LOADING_DELAY 2.0
+
 // This can configure how much load is put on OpenGL.
 // Note: this doens't actually cause a lot of tiler/renderer utilization. It's just a heuristic way to produce a full 60 hz worth of load for the device
 //       it is definitely _not_ a benchmark.
