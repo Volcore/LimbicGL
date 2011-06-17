@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @protocol Texture
+// Returns true once the textures is ready to be used
 - (bool)isReady;
+// Will block until the texture is ready
 - (void)bind;
+// Will never block, even if the texture is not ready
 - (void)unbind;
 @end
 
