@@ -57,4 +57,8 @@
   [driver stopAnimation];
 }
 
+- (Game*)game {
+  return game_;
+}
+
 @end

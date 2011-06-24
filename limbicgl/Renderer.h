@@ -31,5 +31,6 @@ class Game;
 - (void)startAnimation;
 // stop the animation
 - (void)stopAnimation;
+- (Game*)game;
 
 @end

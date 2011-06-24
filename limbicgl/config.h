@@ -44,5 +44,8 @@
 #   define VerboseLog(...)
 #endif
 
+// With this flag you can enable an automated pause as soon as GC completion handler is called. This "avoids" the stutter by pausing the game.
+#define PAUSE_ON_LOGIN
+
 
 #endif  // LIMBICGL_CONFIG_H_

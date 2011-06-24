@@ -27,7 +27,7 @@
 		9FBA944113A7E2970080071B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBA944013A7E2970080071B /* OpenGLES.framework */; };
 		9FBA944713A7E2970080071B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA944513A7E2970080071B /* InfoPlist.strings */; };
 		9FBA944A13A7E2970080071B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944913A7E2970080071B /* main.m */; };
-		9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */; };
+		9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.mm */; };
 		9FBA945013A7E2970080071B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA944E13A7E2970080071B /* MainWindow.xib */; };
 		9FBA945D13A7E2970080071B /* LimbicGLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */; };
 		9FCB68BB13A934B900368BE2 /* SingleThreadDriver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FCB68BA13A934B900368BE2 /* SingleThreadDriver.mm */; };
@@ -73,7 +73,7 @@
 		9FBA944813A7E2970080071B /* limbicgl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "limbicgl-Prefix.pch"; sourceTree = "<group>"; };
 		9FBA944913A7E2970080071B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9FBA944B13A7E2970080071B /* LimbicGLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LimbicGLAppDelegate.h; sourceTree = "<group>"; };
-		9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LimbicGLAppDelegate.m; sourceTree = "<group>"; };
+		9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LimbicGLAppDelegate.mm; sourceTree = "<group>"; };
 		9FBA944F13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		9FBA945C13A7E2970080071B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LimbicGLViewController.xib; sourceTree = "<group>"; };
 		9FCB68B513A932CA00368BE2 /* Driver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Driver.h; path = drivers/Driver.h; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 				9FEF560713A82EC600C9A484 /* game */,
 				9FEF560613A82C5700C9A484 /* config.h */,
 				9FBA944B13A7E2970080071B /* LimbicGLAppDelegate.h */,
-				9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.m */,
+				9FBA944C13A7E2970080071B /* LimbicGLAppDelegate.mm */,
 				9FBA944E13A7E2970080071B /* MainWindow.xib */,
 				9FBA945B13A7E2970080071B /* LimbicGLViewController.xib */,
 				9F54D06213A7E2EF00BCAB6B /* EAGLView.h */,
@@ -305,7 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FBA944A13A7E2970080071B /* main.m in Sources */,
-				9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.m in Sources */,
+				9FBA944D13A7E2970080071B /* LimbicGLAppDelegate.mm in Sources */,
 				9F54D06813A7E2EF00BCAB6B /* EAGLView.mm in Sources */,
 				9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.mm in Sources */,
 				9F54D06A13A7E2EF00BCAB6B /* Renderer.mm in Sources */,

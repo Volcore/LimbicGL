@@ -20,7 +20,12 @@ class Game {
   void Update();
   void Draw();
   void InitGFX();
+  void Pause();
+  void Resume();
  private:
+  double time_;
+  double last_update_;
+  bool paused_;
   bool gfx_initialized_;
   GLProgram *program_;
   TextureManager *texture_manager_;

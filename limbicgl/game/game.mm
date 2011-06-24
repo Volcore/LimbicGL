@@ -48,7 +48,10 @@ static double randomDouble() {
 
 Game::Game()
     : gfx_initialized_(false),
-      program_(0) {
+      program_(0),
+      time_(0.0),
+      paused_(false),
+      last_update_(0.0) {
   textures_[0] = 0;
   textures_[1] = 0;
 }
@@ -64,6 +67,17 @@ void Game::Update() {
   // To simulate a game update, sleep up to 5 ms
   double delay = 0.005 * randomDouble();
   [NSThread sleepForTimeInterval:delay];
+  // Update the time
+  double time = CFAbsoluteTimeGetCurrent();
+  if (paused_) {
+    last_update_ = time;
+    return;
+  }
+  if (last_update_ > 0.0) {
+    double delta = time - last_update_;
+    time_ += delta;
+  }
+  last_update_ = time;
 }
 
 void Game::Draw() {
@@ -71,8 +85,7 @@ void Game::Draw() {
     InitGFX();
   }
   // Clear the scene
-  double time = CFAbsoluteTimeGetCurrent();
-  float c = float(sin(time));
+  float c = float(sin(time_));
   glClearColor(c/2.0f+0.5f, 0.5f, 0.5f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
   // Draw a simple object using VAR
@@ -101,7 +114,7 @@ void Game::Draw() {
   glEnableVertexAttribArray(att_texcoord);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  float base_t = float(fmod(CFAbsoluteTimeGetCurrent(), 1000.0));
+  float base_t = float(fmod(time_, 1000.0));
   const int num_quads = RENDERER_LOAD;
   for (int i=0; i<num_quads; ++i) {
     if ([textures_[i%2] isReady]) {
@@ -125,4 +138,12 @@ void Game::InitGFX() {
   texture_manager_ = [[TextureManager alloc] init];
   textures_[0] = [texture_manager_ loadTexture:@"limbic_logo"];
   textures_[1] = [texture_manager_ loadTexture:@"checkerboard"];
+}
+
+void Game::Pause() {
+  paused_ = true;
+}
+
+void Game::Resume() {
+  paused_ = false;
 }
