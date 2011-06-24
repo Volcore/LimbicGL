@@ -65,7 +65,6 @@
   // This can also run on the GCD queue, but it doesn't have to, as long as it's locked.
   @synchronized(context_) {
     if (context_) {
-
       [EAGLContext setCurrentContext:context_];
       [rendertarget_ deleteFramebuffer];
       [rendertarget_ createFramebuffer:layer forContext:context_];
