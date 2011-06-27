@@ -53,6 +53,7 @@
 - (void) teardown {
   VerboseLog("");
   [self stopAnimation];
+  dispatch_release(queue_);
   @synchronized(context_) {
     if (context_) {
       if (context_ == [EAGLContext currentContext]) {
