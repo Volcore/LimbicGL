@@ -16,6 +16,7 @@
 #import "SingleThreadDriver.h"
 #import "ThreadedDriver.h"
 #import "GCDDriver.h"
+#import "ThreadedGCDDriver.h"
 #include <limbicgl/config.h>
 
 
@@ -34,6 +35,8 @@
     driver = [[GCDDriver alloc] initWithRenderTarget:rendertarget andGame:game_];
 #elif DRIVER == THREADEDDRIVER
     driver = [[ThreadedDriver alloc] initWithRenderTarget:rendertarget andGame:game_];        
+#elif DRIVER == THREADEDGCDDRIVER
+    driver = [[ThreadedGCDDriver alloc] initWithRenderTarget:rendertarget andGame:game_];        
 #else
     driver = [[SingleThreadDriver alloc] initWithRenderTarget:rendertarget andGame:game_];
 #endif

@@ -13,8 +13,9 @@
 #define SINGLETHREADEDDRIVER 0
 #define GCDDRIVER 1
 #define THREADEDDRIVER 2
+#define THREADEDGCDDRIVER 3
 // Specifies with Driver to use
-#define DRIVER GCDDRIVER
+#define DRIVER THREADEDGCDDRIVER
 
 // Toggles between synced and async asset loading
 #define ASYNC_ASSET_LOADING
@@ -36,7 +37,7 @@
 #define RENDERER_LOAD 100
 
 // This can be used to get very verbose traces for debugging
-//#define VERBOSE_LOG
+#define VERBOSE_LOG
 
 #ifdef VERBOSE_LOG
 #   define VerboseLog(fmt, ...) NSLog((@"%s " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__);

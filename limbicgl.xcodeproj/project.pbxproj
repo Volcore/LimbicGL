@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F3EFF8C13B82BF400F4EEC3 /* ThreadedGCDDriver.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F3EFF8B13B82BF400F4EEC3 /* ThreadedGCDDriver.mm */; };
 		9F54D06813A7E2EF00BCAB6B /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06313A7E2EF00BCAB6B /* EAGLView.mm */; };
 		9F54D06913A7E2EF00BCAB6B /* LimbicGLViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06513A7E2EF00BCAB6B /* LimbicGLViewController.mm */; };
 		9F54D06A13A7E2EF00BCAB6B /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F54D06713A7E2EF00BCAB6B /* Renderer.mm */; };
@@ -39,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F3EFF8A13B82BF400F4EEC3 /* ThreadedGCDDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThreadedGCDDriver.h; path = drivers/ThreadedGCDDriver.h; sourceTree = "<group>"; };
+		9F3EFF8B13B82BF400F4EEC3 /* ThreadedGCDDriver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ThreadedGCDDriver.mm; path = drivers/ThreadedGCDDriver.mm; sourceTree = "<group>"; };
 		9F54D06213A7E2EF00BCAB6B /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		9F54D06313A7E2EF00BCAB6B /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
 		9F54D06413A7E2EF00BCAB6B /* LimbicGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LimbicGLViewController.h; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				9FCB68BD13A93DAA00368BE2 /* GCDDriver.mm */,
 				9FCB68BF13A93DB800368BE2 /* ThreadedDriver.h */,
 				9FCB68C013A93DB800368BE2 /* ThreadedDriver.mm */,
+				9F3EFF8A13B82BF400F4EEC3 /* ThreadedGCDDriver.h */,
+				9F3EFF8B13B82BF400F4EEC3 /* ThreadedGCDDriver.mm */,
 			);
 			name = drivers;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				9F5E8ED613AAD6F000413A91 /* TextureManager.mm in Sources */,
 				9F5E8EDB13AAE43F00413A91 /* SyncedTexture.mm in Sources */,
 				9F5E8EE013AB2AD400413A91 /* AsyncTexture.mm in Sources */,
+				9F3EFF8C13B82BF400F4EEC3 /* ThreadedGCDDriver.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
