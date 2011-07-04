@@ -35,6 +35,7 @@
                                     [NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking,
                                     kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat,
                                     nil];
+    self.contentScaleFactor = [[UIScreen mainScreen] scale];
  }
   
   return self;
