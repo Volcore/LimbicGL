@@ -269,6 +269,7 @@
 		9FBA942B13A7E2970080071B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Limbic Software, Inc.";
 			};
 			buildConfigurationList = 9FBA942E13A7E2970080071B /* Build configuration list for PBXProject "limbicgl" */;
@@ -410,9 +411,10 @@
 				GCC_PREFIX_HEADER = "limbicgl/limbicgl-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					DEBUG,
-					ENABLE_PEFORMANCE_MONITOR,
+					ENABLE_PERFORMANCE_MONITOR,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -431,6 +433,7 @@
 				GCC_PREFIX_HEADER = "limbicgl/limbicgl-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = ENABLE_PEFORMANCE_MONITOR;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "limbicgl/limbicgl-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;

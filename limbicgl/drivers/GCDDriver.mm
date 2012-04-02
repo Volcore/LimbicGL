@@ -75,23 +75,22 @@
 
 - (void) drawFrame {
   VerboseLog("");
-  PerformanceMonitor *pm = PerformanceMonitor::Shared();
-  pm->FrameStart();
+  PM_FRAME_START;
   @synchronized(context_) {
     if (context_) {
       [EAGLContext setCurrentContext:context_];
       [rendertarget_ setFramebuffer];
       game_->Draw();
-      pm->Draw(rendertarget_->framebufferWidth, rendertarget_->framebufferHeight);
+      PM_DRAW(rendertarget_->framebufferWidth, rendertarget_->framebufferHeight, PM_DRAWMODE_TIMES);
       [rendertarget_ presentFramebuffer:context_];
       glFlush();
       [EAGLContext setCurrentContext:nil];
     }
   }
-  pm->FrameEnd();
-  pm->UpdateStart();
+  PM_FRAME_END;
+  PM_UPDATE_START;
   game_->Update();
-  pm->UpdateEnd();
+  PM_UPDATE_END;
 }
 
 - (void) triggerDrawFrame {
